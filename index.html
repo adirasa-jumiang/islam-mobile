@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Dashboard Animasi</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    /* Header */
+    .header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+    }
+    .header h2 { margin: 0; }
+
+    /* Konten */
+    .content {
+      padding-bottom: 70px; /* biar tidak ketutup nav bawah */
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card menu */
+    .menu-section {
+      background: white;
+      margin: 15px;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .menu-section h3 {
+      margin: 0 0 15px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .menu-item {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .menu-item:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 5px #f6ff00, 0 0 10px #f6ff00, 0 0 15px #f6ff00, 0 0 20px #f6ff00, 0 0 25px #f6ff00; /* Efek cahaya */
+    }
+
+    .menu-icon {
+      width: 55px;
+      height: 55px;
+      background: #eee;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 8px;
+      color: white;
+    }
+
+    .orange { background: #ff7043; }
+    .teal { background: #26a69a; }
+    .blue { background: #42a5f5; }
+    .green { background: #66bb6a; }
+    .purple { background: #ab47bc; }
+    .pink { background: #ec407a; }
+
+    .menu-item span {
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #2e7d32;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .bottom-nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .bottom-nav button.active {
+      color: #ffeb3b;
+      font-weight: bold;
+    }
+
+    /* Sembunyikan halaman */
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h2>ISLAM MOBILE</h2>
+    <p>Semua Tentang ilmu pengetahuan Islam</p>
+  </div>
+
+  <!-- Konten -->
+  <div id="pages">
+
+    <!-- Halaman Rumah -->
+    <div id="page-rumah" class="page active content">
+      <div class="menu-section">
+        <h3>Pengetahuan</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-icon orange">📖</div><span>Al-Quran</span></div>
+          <div class="menu-item"><div class="menu-icon teal">🙏</div><span>Shalat</span></div>
+          <div class="menu-item"><div class="menu-icon teal">📜</div><span>Panduan</span></div>
+          <div class="menu-item"><div class="menu-icon blue">👁️</div><span>Cerita Nabi</span></div>
+          <div class="menu-item"><div class="menu-icon blue">🔢</div><span>Hijaiyah</span></div>
+          <div class="menu-item"><div class="menu-icon green">💧</div><span>Wudhu</span></div>
+          <div class="menu-item"><div class="menu-icon green">☪️</div><span>Nama Allah</span></div>
+          <div class="menu-item"><div class="menu-icon purple">📚</div><span>Hadist</span></div>
+        </div>
+      </div>
+      <div class="menu-section">
+        <h3>Lain</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><div class="menu-icon purple">🔔</div><span>Pesan</span></div>
+          <div class="menu-item"><div class="menu-icon green">💬</div><span>Komunitas</span></div>
+          <div class="menu-item"><div class="menu-icon pink">📻</div><span>Radio</span></div>
+          <div class="menu-item"><div class="menu-icon blue">🎓</div><span>Zakat</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Halaman Menemukan -->
+    <div id="page-menemukan" class="page content">
+      <div class="menu-section">
+        <h3>Menemukan</h3>
+        <p>Ini halaman menemukan. Bisa isi fitur pencarian, artikel, atau rekomendasi di sini.</p>
+      </div>
+    </div>
+
+    <!-- Halaman Saya -->
+    <div id="page-saya" class="page content">
+      <div class="menu-section">
+        <h3>Profil Saya</h3>
+        <p>Ini halaman profil. Bisa isi biodata, pengaturan akun, dll.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <button id="nav-rumah" class="active">🏠<span>Rumah</span></button>
+    <button id="nav-menemukan">🔍<span>Menemukan</span></button>
+    <button id="nav-saya">👤<span>Saya</span></button>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const navButtons = document.querySelectorAll('.bottom-nav button');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // reset
+        pages.forEach(p => p.classList.remove('active'));
+        navButtons.forEach(b => b.classList.remove('active'));
+
+        // aktifkan
+        btn.classList.add('active');
+        const target = btn.id.replace('nav-', 'page-');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
