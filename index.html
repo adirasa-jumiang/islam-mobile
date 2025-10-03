@@ -55,11 +55,12 @@
     .menu-item {
       text-align: center;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s, text-shadow 0.2s;
     }
     .menu-item:hover {
       transform: scale(1.05);
-      text-shadow: 0 0 5px #f6ff00, 0 0 10px #f6ff00, 0 0 15px #f6ff00, 0 0 20px #f6ff00, 0 0 25px #f6ff00; /* Efek cahaya */
+      text-shadow: 0 0 5px #f6ff00, 0 0 10px #f6ff00, 
+                   0 0 15px #f6ff00, 0 0 20px #f6ff00;
     }
 
     .menu-icon {
@@ -109,6 +110,10 @@
       flex-direction: column;
       align-items: center;
       cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .bottom-nav button:hover {
+      transform: scale(1.1);
     }
 
     .bottom-nav button.active {
@@ -129,8 +134,8 @@
 
   <!-- Header -->
   <div class="header">
-    <h2>ISLAM MOBILE</h2>
-    <p>Semua Tentang ilmu pengetahuan Islam</p>
+    <h2>Masuk Akun</h2>
+    <p>Nikmati lebih banyak fitur</p>
   </div>
 
   <!-- Konten -->
@@ -160,8 +165,7 @@
           <div class="menu-item"><div class="menu-icon blue">🎓</div><span>Zakat</span></div>
         </div>
       </div>
-    </div>
-    <div class="menu-section">
+      <div class="menu-section">
         <h3>Permainan</h3>
         <div class="menu-grid">
           <div class="menu-item"><div class="menu-icon purple">🔔</div><span>Susun Ayat Al-Qur'an</span></div>
@@ -197,20 +201,49 @@
   </div>
 
   <script>
+    // Navigasi
     const pages = document.querySelectorAll('.page');
     const navButtons = document.querySelectorAll('.bottom-nav button');
 
     navButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        // reset
         pages.forEach(p => p.classList.remove('active'));
         navButtons.forEach(b => b.classList.remove('active'));
-
-        // aktifkan
         btn.classList.add('active');
         const target = btn.id.replace('nav-', 'page-');
         document.getElementById(target).classList.add('active');
       });
+    });
+
+    // ---------- Efek Suara ----------
+    let audioCtx;
+    function getCtx() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+    function playTone(freq=440, type="sine", duration=0.1) {
+      const ctx = getCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    }
+
+    function hoverSound() { playTone(880,"sine",0.08); }
+    function clickSound() { 
+      playTone(440,"square",0.12);
+      setTimeout(()=>playTone(660,"sine",0.08),80);
+    }
+
+    // Tambahkan ke semua menu-item dan nav button
+    document.querySelectorAll('.menu-item, .bottom-nav button').forEach(el=>{
+      el.addEventListener('mouseenter', hoverSound);
+      el.addEventListener('click', clickSound);
     });
   </script>
 
